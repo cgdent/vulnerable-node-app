@@ -23,38 +23,6 @@ spec:
         env:   
          - name: MONGO_DATA_DIR
            value: "/data/db"
-        volumeMounts:
-          - name: storage
-            mountPath: /data/db
-      volumes:
-        - name: storage
-          persistentVolumeClaim:
-            claimName: mongo-pvc
-
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mongo-pv
-spec:
-  capacity:
-    storage: 256Mi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: /tmp/db
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mongo-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 256Mi
 
 ---
 apiVersion: v1

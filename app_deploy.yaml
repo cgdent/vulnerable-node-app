@@ -15,7 +15,7 @@ spec:
         app: goof
     spec:
       containers:
-      - image: michaelbraunbass/vulnnodeapp:main
+      - image: 300326902600.dkr.ecr.ap-southeast-2.amazonaws.com/vulnerable-node-app:latest 
         imagePullPolicy: Always
         name: goof
         ports:
@@ -24,7 +24,7 @@ spec:
            allowPrivilegeEscalation: true
         env:
            - name: MONGO_HOST
-             value: "mongo"           
+             value: "mongo"
            - name: MONGO_PORT
              value: "27017"
 
