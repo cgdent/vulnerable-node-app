@@ -15,19 +15,26 @@ spec:
         app: goof
     spec:
       containers:
-      - image: 300326902600.dkr.ecr.ap-southeast-2.amazonaws.com/vulnerable-node-app:latest 
+      - image: 730606171750.dkr.ecr.ap-southeast-2.amazonaws.com/vuln-node:latest 
         imagePullPolicy: Always
         name: goof
         ports:
         - containerPort: 4000
         securityContext:
            allowPrivilegeEscalation: true
+           runAsNonRoot : false
         env:
            - name: MONGO_HOST
-             value: "mongo"
+             value: "ec2-13-55-31-203.ap-southeast-2.compute.amazonaws.com"
            - name: MONGO_PORT
              value: "27017"
-
+        volumeMounts:
+        - mountPath: /cache
+          name: cache-volume
+      volumes:
+      - name: cache-volume
+        emptyDir:
+          sizeLimit: 50Gi
 
 ---
 apiVersion: v1
